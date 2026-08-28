@@ -72,23 +72,26 @@ input_data = {
     "G2": G2
 }
 
-# Add remaining columns with default value 0
-required_columns = [
-    'Mjob','Fjob','reason','guardian','schoolsup','famsup',
-    'paid','activities','nursery','higher','internet',
-    'romantic','famrel','freetime','goout','Dalc',
-    'Walc','health'
-]
 
-for col in required_columns:
-    input_data[col] = 0
+# Load training data
+training_df = pd.read_csv(
+    "data/processed/preprocessed_student_data.csv"
+)
 
+# Add missing features using their median values
+# instead of setting everything to 0
+for col in training_df.drop("G3", axis=1).columns:
+    if col not in input_data:
+        input_data[col] = training_df[col].median()
+
+# Create input DataFrame
 input_df = pd.DataFrame([input_data])
 
-# Arrange columns in the same order as the model expects
-training_df = pd.read_csv("data/processed/preprocessed_student_data.csv")
-input_df = input_df[training_df.drop("G3", axis=1).columns]
-
+# Arrange columns in exactly the same order
+# as the model expects
+input_df = input_df[
+    training_df.drop("G3", axis=1).columns
+]
 # -------------------------
 # Prediction
 # -------------------------
