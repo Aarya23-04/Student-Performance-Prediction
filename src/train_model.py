@@ -117,6 +117,7 @@ print("\nLinear Regression Model Trained Successfully!")
 
 y_pred_lr = linear_model.predict(X_test)
 
+# Evaluate Linear Regression
 mae_lr = mean_absolute_error(y_test, y_pred_lr)
 mse_lr = mean_squared_error(y_test, y_pred_lr)
 rmse_lr = mse_lr ** 0.5
@@ -223,5 +224,39 @@ joblib.dump(
 )
 
 print("\nBest model saved successfully!")
+
+# ==============================
+# Save Model Evaluation Results
+# ==============================
+
+model_results = pd.DataFrame({
+    "Model": [
+        "Decision Tree",
+        "Random Forest",
+        "Linear Regression"
+    ],
+    "MAE": [
+        mae_dt,
+        mae_rf,
+        mae_lr
+    ],
+    "MSE": [
+        mse_dt,
+        mse_rf,
+        mse_lr
+    ],
+    "R2 Score": [
+        r2_dt,
+        r2_rf,
+        r2_lr
+    ]
+})
+
+model_results.to_csv(
+    "reports/model_performance.csv",
+    index=False
+)
+
+print("\nModel performance saved successfully!")
 
 print("\nTraining and evaluation completed successfully!")
