@@ -1,113 +1,140 @@
 # 🎓 Student Performance Prediction
 
-A Machine Learning project that predicts a student's final academic grade using demographic, social, and academic information.
+A Machine Learning web application that predicts a student's final academic grade based on academic, demographic, and behavioral information.
 
-The project uses multiple regression algorithms and provides an interactive Streamlit web application for making predictions.
+The project uses multiple Machine Learning algorithms and integrates the best-performing model into a Streamlit web application for real-time prediction.
 
 ---
 
 ## 📌 Project Overview
 
-Student performance can be influenced by several factors such as previous grades, study time, failures, absences, family background, and other student-related attributes.
+Student performance can be influenced by several factors such as study time, previous grades, absences, family background, and other personal and academic characteristics.
 
 This project analyzes these factors and builds Machine Learning models to predict the student's final grade (G3).
 
-The trained model is integrated with a Streamlit web application where users can enter student information and receive a predicted final grade.
+The trained model is integrated with a Streamlit application where users can enter student information and receive a predicted final grade.
 
 ---
 
 ## 🎯 Objectives
 
-- Analyze student performance data.
+- Analyze factors affecting student performance.
 - Perform Exploratory Data Analysis (EDA).
-- Preprocess categorical and numerical data.
-- Train multiple Machine Learning regression models.
+- Preprocess the student dataset.
+- Train multiple Machine Learning models.
 - Compare model performance using evaluation metrics.
-- Identify important features affecting student performance.
-- Build an interactive prediction web application.
+- Identify important features affecting prediction.
+- Deploy the best-performing model through a Streamlit application.
+- Provide an easy-to-use student performance prediction interface.
 
 ---
 
-## 🗂️ Dataset
+## 🧠 Machine Learning Models
 
-The project uses the Student Performance Dataset containing information about students, including:
+The following regression models were evaluated:
+
+1. Decision Tree Regressor
+2. Random Forest Regressor
+3. Linear Regression
+
+### Best Model
+
+Based on the evaluation results, **Random Forest Regressor** performed the best.
+
+| Model | MAE | MSE | R² Score |
+|---|---:|---:|---:|
+| Decision Tree | 1.3038 | 5.6582 | 0.7241 |
+| Random Forest | **1.1051** | **3.4867** | **0.8300** |
+| Linear Regression | 1.4955 | 5.0324 | 0.7546 |
+
+Random Forest achieved an **R² score of 0.83**, making it the best-performing model among the evaluated models.
+
+---
+
+## 📊 Exploratory Data Analysis
+
+The project includes several EDA visualizations:
+
+- Correlation heatmap
+- Feature distributions
+- Feature relationships
+- Feature importance
+- Model comparison
+
+### Feature Importance
+
+The feature importance analysis helps identify which variables contribute most to predicting the final grade.
+
+![Feature Importance](reports/feature_importance.png)
+
+### Model Comparison
+
+![Model Comparison](reports/model_comparison.png)
+
+---
+
+## 🖥️ Streamlit Application
+
+The trained model is integrated into a Streamlit web application.
+
+Users can enter:
 
 - School
 - Gender
 - Age
+- Address
 - Family size
-- Parents' education
-- Study time
+- Parent status
+- Mother education
+- Father education
 - Travel time
-- Past class failures
+- Study time
+- Previous class failures
 - Absences
 - First period grade (G1)
 - Second period grade (G2)
-- Final grade (G3)
 
-The target variable is:
+The application then predicts the student's final grade out of 20.
 
-**G3 — Final Grade**
+### Application Features
 
----
-
-## 🔍 Exploratory Data Analysis
-
-The project includes EDA to understand patterns in the dataset.
-
-Analysis includes:
-
-- Dataset structure and dimensions
-- Missing-value analysis
-- Statistical summary
-- Final grade distribution
-- Study time vs final grade
-- Absences vs final grade
-- Correlation analysis
-- Top features related to final grade
+- 📋 Student information input
+- 🤖 Machine Learning prediction
+- 📊 Performance classification
+- 📈 Prediction progress indicator
+- 📝 Student summary
+- 📜 Prediction history
+- ⚠️ Prediction range/uncertainty information
 
 ---
 
-## 🤖 Machine Learning Models
-
-Three regression algorithms were evaluated:
-
-### 1. Linear Regression
-
-Used as a baseline regression model.
-
-### 2. Decision Tree Regressor
-
-Used to capture non-linear relationships between student characteristics and final grade.
-
-### 3. Random Forest Regressor
-
-An ensemble learning method that combines multiple decision trees to improve prediction performance.
-
-Random Forest was selected as the final model based on its evaluation performance.
-
----
-
-## 📊 Model Evaluation
-
-The models were evaluated using:
-
-- Mean Absolute Error (MAE)
-- Mean Squared Error (MSE)
-- Root Mean Squared Error (RMSE)
-- R² Score
-
-Random Forest achieved the best performance among the tested models.
-
-The project also uses **5-Fold Cross-Validation** to evaluate model stability.
-
----
-
-## ⭐ Feature Importance
-
-Random Forest feature importance was used to identify the features that contribute most to the prediction.
-
-The top features can be viewed in:
+## 📁 Project Structure
 
 ```text
-reports/feature_importance.png
+Student-Performance-Prediction/
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── models/
+│   └── student_performance_model.pkl
+│
+├── notebooks/
+│   └── EDA.ipynb
+│
+├── reports/
+│   ├── feature_importance.png
+│   ├── model_comparison.png
+│   └── model_performance.csv
+│
+├── src/
+│   ├── data_preprocessing.py
+│   ├── predict.py
+│   └── train_model.py
+│
+├── app.py
+├── README.md
+├── requirements.txt
+├── LICENSE
+└── .gitignore
